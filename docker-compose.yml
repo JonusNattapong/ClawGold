@@ -1,0 +1,56 @@
+services:
+  db:
+    image: alpine:3.20
+    container_name: clawgold-db
+    command: >
+      sh -c "mkdir -p /data && touch /data/news.db && chmod 666 /data/news.db && tail -f /dev/null"
+    volumes:
+      - news_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /data/news.db"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: clawgold-app
+    command: ["python", "scripts/news_worker.py"]
+    env_file:
+      - .env
+    environment:
+      NEWS_DB_PATH: /data/news.db
+      RESEARCH_SYMBOL: XAUUSD
+      RESEARCH_INTERVAL_SECONDS: 1800
+      RESEARCH_USE_AI: "true"
+    volumes:
+      - news_data:/data
+      - app_logs:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: clawgold-dashboard
+    command: ["streamlit", "run", "scripts/dashboard.py", "--server.address=0.0.0.0", "--server.port=8501"]
+    environment:
+      NEWS_DB_PATH: /data/news.db
+    volumes:
+      - news_data:/data
+    ports:
+      - "8501:8501"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  news_data:
+  app_logs:

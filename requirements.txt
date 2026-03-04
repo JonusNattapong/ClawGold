@@ -1,0 +1,26 @@
+yfinance
+pandas
+numpy
+requests
+MetaTrader5
+PyYAML
+pandas-ta
+backtrader
+scikit-learn
+forex-python
+langgraph
+langfuse
+
+# ─── Phase 1: High Impact / Quick Wins ───────────────
+litellm>=1.0.0
+apscheduler>=3.10.0
+rich>=13.0.0
+
+# ─── Phase 2: Quality of Results ────────────────────
+pydantic-ai>=0.15.0
+langfuse>=2.0.0
+
+# ─── Phase 3: System Scale ──────────────────────────
+peewee>=3.17.0
+diskcache>=5.6.0
+omegaconf>=2.3.0

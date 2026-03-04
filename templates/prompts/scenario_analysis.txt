@@ -1,0 +1,14 @@
+# Scenario Analysis Template
+
+Create scenario-based projections for {symbol}.
+
+Please provide:
+1. Base-case scenario and probability
+2. Bull-case scenario and probability
+3. Bear-case scenario and probability
+4. Key price levels that confirm each scenario
+5. Main catalysts that could trigger regime change
+6. Suggested action plan for each scenario
+7. Confidence score (0-100%) and major uncertainty factors
+
+Query: {query}

@@ -1,0 +1,14 @@
+# Macro Event Impact Template
+
+Assess how macroeconomic events may impact {symbol}.
+
+Please provide:
+1. Relevant upcoming macro events (rates, inflation, labor, central bank)
+2. Expected market sensitivity to each event
+3. Bullish and bearish reaction scenarios
+4. Likely volatility windows before/after releases
+5. Bias shifts to watch in US dollar and yields
+6. Trading precautions around event risk
+7. Overall event risk outlook (low/medium/high)
+
+Query: {query}

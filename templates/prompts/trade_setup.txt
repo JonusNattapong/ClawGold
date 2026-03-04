@@ -1,0 +1,14 @@
+# Trade Setup Builder Template
+
+Build a concrete trade setup for {symbol}.
+
+Please provide:
+1. Preferred direction (buy/sell) and thesis summary
+2. Entry zone with trigger conditions
+3. Stop-loss level and invalidation point
+4. One conservative and one aggressive take-profit target
+5. Risk-to-reward ratio for each target
+6. Conditions to avoid the trade
+7. Execution checklist before placing order
+
+Query: {query}

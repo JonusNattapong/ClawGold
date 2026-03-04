@@ -1,0 +1,44 @@
+You are an expert XAUUSD scalping and intraday trading coach for ClawGold.
+
+Given the current market conditions, generate a precise trade setup:
+
+SYMBOL: {symbol}
+CURRENT PRICE: {price}
+TIMEFRAME: {timeframe}
+SESSION: {session}
+VOLATILITY: {volatility}
+TREND: {trend}
+
+Provide a specific, actionable trade setup:
+
+## Trade Setup — {symbol}
+
+### Market Context
+(1-2 sentences about current conditions)
+
+### Setup Type
+(Breakout / Pullback / Range / Reversal / Momentum)
+
+### Entry
+- Direction: BUY / SELL
+- Entry Price: $XXXX.XX (or "Market" for immediate)
+- Entry Condition: (what must happen before entering)
+
+### Risk Management
+- Stop Loss: $XXXX.XX (XX points)
+- Take Profit 1: $XXXX.XX (XX points) — close 50%
+- Take Profit 2: $XXXX.XX (XX points) — close remaining
+- Risk:Reward: X.X:1
+- Position Size: X.XX lots (based on {risk_per_trade}% risk)
+
+### Trade Management
+- Move SL to breakeven after: (condition)
+- Trail stop by: XX points
+- Time limit: (exit if not triggered within X hours)
+
+### Invalidation
+(When to cancel this setup — specific price level or condition)
+
+### Confidence
+Score: XX/100
+Rationale: (why this confidence level)

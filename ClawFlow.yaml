@@ -1,0 +1,132 @@
+# Install with: clawflow install claw-gold
+metadata:
+  name: "claw-gold"
+  version: "1.0.0"
+  description: "XAUUSD real trading and analysis skill for OpenClaw"
+  author: "JonusNattapong"
+  license: "MIT"
+  repository: "https://github.com/JonusNattapong/ClawGold"
+  documentation: "https://github.com/JonusNattapong/ClawGold#readme"
+
+# Installation steps
+installation:
+  steps:
+    - name: "Clone repository"
+      command: "git clone https://github.com/JonusNattapong/ClawGold.git ~/.openclaw/skills/claw-gold"
+      cwd: "~/.openclaw/skills"
+
+    - name: "Create directories"
+      command: "mkdir -p ~/.openclaw/skills/claw-gold/logs ~/.openclaw/skills/claw-gold/data"
+      cwd: "~/.openclaw/skills/claw-gold"
+
+    - name: "Install Python dependencies"
+      command: "pip install -r requirements.txt"
+      cwd: "~/.openclaw/skills/claw-gold"
+
+    - name: "Initialize portfolio"
+      command: "python scripts/claw_gold.py initialize_plugin"
+      cwd: "~/.openclaw/skills/claw-gold"
+
+# Configuration templates
+configuration:
+  templates:
+    - name: "Basic Trading Configuration"
+      description: "Default setup for XAUUSD real trading"
+      content: |
+        trading:
+          initial_balance: 10000
+          symbol: "XAUUSD"
+          short_period: 10
+          long_period: 20
+          risk_per_trade: 0.01  # 1% of balance
+
+        api:
+          provider: "yfinance"
+          ticker: "GC=F"
+
+        logging:
+          enable_logs: true
+          log_file: "logs/trades.log"
+
+    - name: "Conservative Trading"
+      description: "Lower risk settings for conservative real trading"
+      content: |
+        trading:
+          initial_balance: 5000
+          symbol: "XAUUSD"
+          short_period: 20
+          long_period: 50
+          risk_per_trade: 0.005  # 0.5% of balance
+
+        api:
+          provider: "yfinance"
+          ticker: "GC=F"
+
+        logging:
+          enable_logs: true
+          log_file: "logs/trades.log"
+
+    - name: "Aggressive Trading"
+      description: "Higher risk for experienced traders"
+      content: |
+        trading:
+          initial_balance: 10000
+          symbol: "XAUUSD"
+          short_period: 5
+          long_period: 10
+          risk_per_trade: 0.02  # 2% of balance
+
+        api:
+          provider: "yfinance"
+          ticker: "GC=F"
+
+        logging:
+          enable_logs: true
+          log_file: "logs/trades.log"
+
+# AI Tools Configuration
+ai_tools:
+  enabled: true
+  tools:
+    - name: "opencode"
+      enabled: true
+      command: "opencode run"
+      description: "OpenCode AI CLI"
+    - name: "kilocode"
+      enabled: true
+      command: "kilo run"
+      description: "KiloCode AI CLI"
+    - name: "gemini"
+      enabled: true
+      command: "gemini"
+      description: "Google Gemini CLI"
+  cache_ttl_hours: 6
+  parallel_execution: true
+  
+  # Rate limiting (calls per minute)
+  rate_limits:
+    opencode: 10
+    kilocode: 10
+    gemini: 15
+  
+  # Retry configuration
+  retry:
+    max_retries: 2
+    retry_delay: 1  # seconds
+    enable_fallback: true
+  
+  # Metrics collection
+  metrics:
+    enabled: true
+    log_interval: 3600  # seconds
+
+# OpenClaw Integration
+openclaw:
+  supported_tools:
+    - get_xauusd_price
+    - calculate_moving_average
+    - generate_trading_signal
+    - execute_trade
+    - get_portfolio_status
+    - ai_research
+    - get_market_sentiment

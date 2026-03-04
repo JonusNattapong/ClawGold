@@ -1,0 +1,26 @@
+{
+    "balance": 9742.6,
+    "positions": [
+        {
+            "symbol": "XAUUSD",
+            "amount": 0.05,
+            "price": 5148.0,
+            "type": "buy",
+            "timestamp": "2026-03-04 02:10:33.690174"
+        }
+    ],
+    "trades": [
+        {
+            "action": "BUY",
+            "amount": 0.1,
+            "price": 5148.0,
+            "timestamp": "2026-03-04 02:10:33.596262"
+        },
+        {
+            "action": "SELL",
+            "amount": 0.05,
+            "price": 5148.0,
+            "timestamp": "2026-03-04 02:10:33.690238"
+        }
+    ]
+}

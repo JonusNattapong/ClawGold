@@ -1,0 +1,14 @@
+# News Sentiment Analysis Template
+
+Analyze the sentiment of recent news and market sentiment for {symbol}.
+
+Please provide:
+1. Overall sentiment (bullish/bearish/neutral)
+2. Key themes in recent news
+3. Impact assessment (high/medium/low)
+4. Sentiment trend (improving/deteriorating/stable)
+5. Notable events or announcements
+6. Market reaction to news
+7. Confidence score (0-100%)
+
+Query: {query}

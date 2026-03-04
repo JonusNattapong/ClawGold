@@ -1,0 +1,155 @@
+trading:
+  mode: real
+  initial_balance: 10000
+  symbol: XAUUSD
+  risk_per_trade: 0.01
+
+# Risk Management Settings
+risk:
+  max_positions: 5
+  max_daily_loss: 500.0
+  max_position_size: 1.0
+  max_total_risk: 0.05
+  min_margin_level: 100.0
+
+# MT5 settings (can override via env vars: MT5_LOGIN, MT5_PASSWORD, MT5_SERVER)
+mt5:
+  login: 0
+  password: ""
+  server: ""
+  terminal_path: C:\Program Files\MetaTrader 5\terminal64.exe
+
+api:
+  provider: yfinance
+  ticker: GC=F
+
+logging:
+  enable: true
+  log_file: logs/trades.log
+
+# Telegram Notifications
+# Get bot token from @BotFather on Telegram
+# Chat ID can be your user ID or channel ID (e.g., -1002197548947)
+telegram:
+  enabled: true
+  bot_token: ""  # Set via TELEGRAM_BOT_TOKEN in .env
+  chat_id: "-1002197548947"  # Or use TELEGRAM_CHAT_ID env var
+  
+  # Notification settings
+  notify_on:
+    trade_executed: true      # When trade is opened
+    position_alert: true      # When P/L threshold hit
+    signal_generated: true    # When AI signal generated
+    daily_summary: true       # Daily at configured time
+    system_errors: true       # System errors/warnings
+    
+  # Alert thresholds
+  alert_thresholds:
+    profit_percent: 2.0       # Alert when profit > 2%
+    loss_percent: -1.0        # Alert when loss > -1%
+    
+  # Daily summary time (24-hour format)
+  summary_time: "17:00"
+
+# AI Sub-Agent System
+# Uses external AI CLI tools as autonomous agents for trading tasks.
+# No model training required — delegates to pre-trained AI via CLI.
+agent:
+  # Preferred tool order for auto-selection (run_best fallback chain)
+  preferred_tools:
+    - gemini
+    - opencode
+    - kilocode
+    - codex
+
+  # Cache settings (avoid re-running identical queries)
+  cache:
+    enabled: true
+    ttl_hours: 4              # Cached responses expire after 4 hours
+    dir: "data/agent_cache"
+
+  # Execution defaults
+  execution:
+    timeout: 120              # Max seconds per CLI invocation
+    max_parallel: 3           # Max concurrent tool calls (consensus/parallel)
+    consensus_tools: 3        # Number of tools for consensus queries
+
+  # Scheduler settings (automated daily tasks)
+  scheduler:
+    enabled: false            # Set true to auto-start scheduler
+    db_path: "data/agent_scheduler.db"
+    tasks:
+      morning_research:
+        time: "07:00"
+        enabled: true
+      morning_plan:
+        time: "07:30"
+        enabled: true
+      midday_analysis:
+        time: "12:00"
+        enabled: true
+      position_check:
+        interval_seconds: 600 # Every 10 minutes
+        enabled: true
+      afternoon_risk:
+        time: "15:00"
+        enabled: true
+      daily_summary:
+        time: "17:00"
+        enabled: true
+      evening_research:
+        time: "20:00"
+        enabled: true
+
+  # Notify results via Telegram
+  notify_results: true
+
+# ─────────────────────────────────────────────────────────────
+# BUSINESS MODULES
+# ─────────────────────────────────────────────────────────────
+
+# Signal Service — Telegram subscription business
+signal_service:
+  db_path: "data/signal_service.db"
+  tiers:
+    free:
+      delay_hours: 4
+      signals_per_day: 3
+      price_usd: 0
+    basic:
+      delay_hours: 0
+      signals_per_day: 999
+      price_usd: 29
+    pro:
+      delay_hours: 0
+      signals_per_day: 999
+      price_usd: 79
+      include_ai_reasoning: true
+    vip:
+      delay_hours: 0
+      signals_per_day: 999
+      price_usd: 199
+      include_ai_reasoning: true
+      include_consultation: true
+  # Telegram Group/Channel IDs per tier
+  channels:
+    free:  "-1002530348291"   # Free room  (แจกฟรี, ล่าช้า 4h)
+    basic: "-1002609941948"   # Basic room ($29/mo, real-time)
+    pro:   "-1002694677449"   # Pro room   ($79/mo, entry+SL+TP+AI)
+    vip:   ""                  # VIP room   ($199/mo) — ตั้งเพิ่มภายหลัง
+  admin_contact: "@ClawGoldAdmin"
+  website: "https://clawgold.io"
+
+# PAMM Manager — Investor managed accounts
+pamm:
+  db_path: "data/pamm.db"
+  performance_fee: 0.20    # 20% of profits above high watermark
+  management_fee: 0.015    # 1.5% per year (billed monthly)
+  minimum_investment: 1000 # USD
+  reporting_day: 1         # Day of month to generate statements
+
+# Performance Tracker — Track record & reporting
+performance:
+  db_path: "data/performance.db"
+  report_output: "performance_report.html"
+  myfxbook_export: "data/myfxbook_export.json"

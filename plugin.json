@@ -1,0 +1,136 @@
+{
+  "name": "claw-gold",
+  "version": "2.0.0",
+  "description": "ClawGold v2.0 — AI-powered XAUUSD trading with LiteLLM, APScheduler, and advanced strategies",
+  "author": "JonusNattapong",
+  "homepage": "https://github.com/JonusNattapong/ClawGold",
+  "kind": "extension",
+  "status": "production",
+  "phase": "Phase 1 Complete",
+  "sandbox": {
+    "level": "medium",
+    "resources": {
+      "max_memory": 134217728
+    }
+  },
+  "features": {
+    "litellm_integration": "Unified AI provider interface with automatic fallback",
+    "apscheduler_backend": "Persistent background job scheduling with crash recovery",
+    "rich_logging": "Enhanced console output with colors, panels, and tables",
+    "cost_tracking": "Real-time LLM cost analytics per provider",
+    "backward_compatible": "100% backward compatible with v1.x"
+  },
+  "tools": [
+    {
+      "name": "get_xauusd_price",
+      "description": "Fetch current XAUUSD price in real-time",
+      "category": "market_data"
+    },
+    {
+      "name": "calculate_moving_average",
+      "description": "Calculate EMA/SMA across multiple timeframes (M15, H1, H4, D1)",
+      "category": "technical_analysis"
+    },
+    {
+      "name": "generate_trading_signal",
+      "description": "Generate BUY/SELL/HOLD signals with confidence scores via MA crossover",
+      "category": "signal_generation"
+    },
+    {
+      "name": "execute_trade",
+      "description": "Execute buy/sell trades via MT5 integration with risk management",
+      "category": "trading"
+    },
+    {
+      "name": "get_portfolio_status",
+      "description": "Get live account balance, positions, P&L, and margin status",
+      "category": "portfolio"
+    },
+    {
+      "name": "ai_research",
+      "description": "Multi-AI market research with LiteLLM (OpenCode, KiloCode, Gemini, Codex)",
+      "category": "research",
+      "new_in_v2": true
+    },
+    {
+      "name": "get_market_sentiment",
+      "description": "Real-time sentiment analysis from news aggregation and AI consensus",
+      "category": "sentiment"
+    },
+    {
+      "name": "get_agent_metrics",
+      "description": "View per-tool performance metrics (success rate, response time, costs)",
+      "category": "monitoring",
+      "new_in_v2": true
+    },
+    {
+      "name": "get_scheduled_tasks",
+      "description": "List all scheduled trading tasks and their status",
+      "category": "scheduler",
+      "new_in_v2": true
+    },
+    {
+      "name": "get_cost_report",
+      "description": "Get LLM cost breakdown by provider and date range",
+      "category": "analytics",
+      "new_in_v2": true
+    }
+  ],
+  "hooks": [
+    {
+      "event": "startup",
+      "handler": "initialize_plugin"
+    },
+    {
+      "event": "scheduler_start",
+      "handler": "start_background_scheduler",
+      "new_in_v2": true
+    }
+  ],
+  "dependencies": {
+    "litellm": ">=1.0.0",
+    "apscheduler": ">=3.10.0",
+    "rich": ">=13.0.0"
+  },
+  "configuration": {
+    "trading": {
+      "mode": "simulation|real",
+      "symbol": "XAUUSD",
+      "risk_per_trade": "0.0-1.0"
+    },
+    "agent": {
+      "preferred_tools": ["opencode", "kilocode", "gemini"],
+      "cache_ttl_hours": 4,
+      "timeout_seconds": 180,
+      "use_consensus": false
+    },
+    "scheduler": {
+      "enabled": true,
+      "max_concurrent_jobs": 4,
+      "grace_period_seconds": 30
+    },
+    "langfuse": {
+      "enabled": false,
+      "api_key": "YOUR_LANGFUSE_API_KEY"
+    }
+  },
+  "permissions": [
+    "read:files",
+    "write:files",
+    "network:api",
+    "execute:subprocess",
+    "storage:sqlite"
+  ],
+  "changelog": {
+    "v2.0.0": {
+      "date": "2026-03-04",
+      "highlights": [
+        "✅ LiteLLM unified AI provider interface",
+        "✅ APScheduler persistent background task scheduling",
+        "✅ Rich enhanced console logging with colors/panels/tables",
+        "✅ Real-time LLM cost tracking per provider",
+        "✅ 100% backward compatible with v1.x"
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# Technical Analysis Template
+
+Perform technical analysis for {symbol} focusing on:
+
+1. Trend analysis (short, medium, long term)
+2. Key moving averages (20, 50, 200 periods)
+3. Support and resistance levels
+4. Chart patterns identified
+5. Momentum indicators (RSI, MACD)
+6. Volume analysis
+7. Entry/exit points recommendation
+8. Stop-loss and take-profit levels
+
+Query: {query}

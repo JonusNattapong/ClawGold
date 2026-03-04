@@ -1,0 +1,14 @@
+# Risk Management Review Template
+
+Evaluate risk conditions for trading {symbol}.
+
+Please provide:
+1. Position sizing guidance based on volatility
+2. Maximum acceptable drawdown for this setup
+3. Recommended stop-loss distance and rationale
+4. Risk-to-reward assessment for likely entries
+5. Correlation or concentration risk to monitor
+6. Key invalidation conditions
+7. Final risk rating (low/medium/high) with confidence score (0-100%)
+
+Query: {query}

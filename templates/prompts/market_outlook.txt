@@ -1,0 +1,12 @@
+# Market Outlook Analysis Template
+
+Analyze the current market outlook for {symbol} based on recent price action, news, and technical indicators.
+
+Please provide:
+1. Current market sentiment (bullish/bearish/neutral)
+2. Key support and resistance levels
+3. Potential price targets
+4. Risk factors to watch
+5. Overall recommendation with confidence score (0-100%)
+
+Query: {query}
