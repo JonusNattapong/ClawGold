@@ -90,16 +90,28 @@ ai_tools:
   tools:
     - name: "opencode"
       enabled: true
-      command: "opencode run"
-      description: "OpenCode AI CLI"
-    - name: "kilocode"
+      command: "opencode run --format json"
+      description: "OpenCode AI CLI for analysis"
+    - name: "codex"
       enabled: true
-      command: "kilo run"
-      description: "KiloCode AI CLI"
+      command: "codex run --search"
+      description: "Codex AI CLI for web-search"
+    - name: "claude"
+      enabled: true
+      command: "claude run --json-schema"
+      description: "Claude Code AI CLI for structured output"
     - name: "gemini"
       enabled: true
-      command: "gemini"
-      description: "Google Gemini CLI"
+      command: "gemini --yolo"
+      description: "Google Gemini CLI for full-auto"
+  
+  # Task specific routing priorities
+  routing:
+    research: ["codex", "gemini"]
+    technical: ["opencode", "claude"]
+    strategy: ["claude", "opencode"]
+    general: ["gemini", "codex"]
+
   cache_ttl_hours: 6
   parallel_execution: true
   
