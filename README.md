@@ -29,6 +29,7 @@
 - **Risk Management**: Position sizing, daily loss limits, margin monitoring
 - **Unified CLI**: Single command interface for all trading operations
 - **Local-First**: Self-hosted database, no cloud dependencies
+- **Smart CLI Automation**: Real-world CLI flags from OpenCode, Gemini, Codex, and Claude are orchestrated through [scripts/agent_executor.py](scripts/agent_executor.py) to run smart routing, live web search, JSON-schema validation, and full-auto flows.
 
 ---
 
@@ -398,6 +399,27 @@ User Request → SubAgent Orchestrator → AgentExecutor → AI CLI Tool
                strategist,              History/Metrics
                monitor)                 Fallback Chain
 ```
+
+## Smart Agent Automation
+
+Every agent run now goes through a smart orchestration layer that maps `TaskCategory` to the most appropriate CLI tool, builds each provider's real-world flags (e.g., `--format json`, `--search`, `--json-schema`, `--yolo`), and validates outputs as structured JSON before passing the result back to the trading layer. The orchestration logic lives in [scripts/sub_agent.py](scripts/sub_agent.py) and [scripts/agent_executor.py](scripts/agent_executor.py) so that every call is scoped, routed, and audited.
+
+### Automation Flow
+
+1. **Task classification** determines whether the request is research, technical analysis, or execution-focused.
+2. **Smart routing** picks OpenCode for deep reviews, Codex for live web search, Claude for structured JSON answers, and Gemini for fast full-auto responses.
+3. **CLI builders** attach the latest flags (`--format json`, `--search`, `--json-schema`, `--yolo`) and handle retries/fallbacks via LiteLLM when needed.
+4. **Structured output** ensures downstream modules (risk, journal, MT5) receive predictable data.
+
+### Try it out
+
+Run any agent command the same way you always have; the automation layer now upgrades the command for you. For example:
+
+```powershell
+python claw.py agent run strategist --symbol XAUUSD
+```
+
+This command now triggers a full automation pipeline: agent routing picks the best CLI, runs it with CLI-specific flags, conducts live research when necessary, and emits a JSON-ready signal for execution.
 
 ### Agent Commands
 
